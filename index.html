@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Score Analyzer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: white;
+      color: black;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      border: 1px solid black;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      text-align: center;
+      border-bottom: 1px solid black;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    details summary {
+      font-weight: bold;
+      cursor: pointer;
+      border: 1px solid black;
+      padding: 5px;
+      background: #f0f0f0;
+    }
+
+    #instructions {
+      padding: 10px;
+      border: 1px solid black;
+      margin-top: 5px;
+      background: #fff;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .subject {
+      flex: 1;
+      border: 1px solid black;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .subject img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border: 1px solid black;
+    }
+
+    .subject input {
+      margin-top: 10px;
+      width: 100%;
+      padding: 5px;
+      font-size: 14px;
+      border: 1px solid black;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 14px;
+      background: white;
+      border: 1px solid black;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #eaeaea;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 12px;
+      border-top: 1px solid black;
+      padding-top: 10px;
+    }
+
+    #source {
+      font-size: 13px;
+      margin-top: 20px;
+      font-style: italic;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>The Analyzer</h1>
+
+    <details>
+      <summary>Instructions</summary>
+      <div id="instructions">Enter your grades in Science, Math, and English. Then click "Get Rating" to see your standing.</div>
+    </details>
+
+    <form onsubmit="return false;">
+      <div class="row">
+        <div class="subject">
+          <img src="https://i.pinimg.com/736x/87/61/1e/87611ec4cdc95c6ed43f381380277064.jpg" alt="Science">
+          <input type="number" id="Grade1" placeholder="Science Grade" />
+        </div>
+        <div class="subject">
+          <img src="https://i.pinimg.com/736x/48/2f/40/482f40d47997f1116b98ff1de9b14b18.jpg" alt="Math">
+          <input type="number" id="Grade2" placeholder="Math Grade" />
+        </div>
+        <div class="subject">
+          <img src="https://i.pinimg.com/736x/c4/44/44/c44444803dac7e857d0ad1bdb800cf28.jpg" alt="English">
+          <input type="number" id="Grade3" placeholder="English Grade" />
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <button type="button" onclick="calculateAverage()">Get Standing</button>
+      </div>
+    </form>
+
+    <div id="source">
+      Note: Grading policies will differ based on institutional guidelines.
+    </div>
+
+    <footer>
+      &copy; Lyka Medina
+    </footer>
+  </div>
+
+  <script>
+    function calculateAverage() {
+      const g1 = parseFloat(document.getElementById("Grade1").value);
+      const g2 = parseFloat(document.getElementById("Grade2").value);
+      const g3 = parseFloat(document.getElementById("Grade3").value);
+
+      if (isNaN(g1) || isNaN(g2) || isNaN(g3)) {
+        alert("All grades are required.");
+        return;
+      }
+
+      const avg = ((g1 + g2 + g3) / 3).toFixed(2);
+      let result = `Your average is ${avg} - `;
+
+      if (avg >= 94) result += "Excellent.";
+      else if (avg >= 87) result += "Above Satisfactory.";
+      else if (avg >= 80) result += "Satisfactory.";
+      else if (avg >= 75) result += "Needs Improvement.";
+      else if (avg >= 70) result += "Poor.";
+      else result += "Failing.";
+
+      alert(result);
+    }
+  </script>
+
+</body>
+</html>
